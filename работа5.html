@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оборудование пивопроизводства</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e67e22;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+            --gray: #95a5a6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.5;
+            color: #333;
+            background-color: #f5f7fa;
+            padding: 0;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 12px 15px;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            min-height: 100vh;
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar {
+            background: var(--light);
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .nav-container {
+            display: flex;
+            gap: 5px;
+        }
+
+        .content {
+            flex: 1;
+            padding: 15px;
+            overflow: auto;
+        }
+
+        .nav-item {
+            padding: 10px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            font-weight: 500;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        .nav-item i {
+            margin-right: 5px;
+            width: 16px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .nav-item:hover {
+            background: #dfe6e9;
+        }
+
+        .nav-item.active {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .section {
+            display: none;
+            margin-bottom: 20px;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 16px;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--secondary);
+            color: var(--dark);
+        }
+
+        .form-compact {
+            background: #f9f9f9;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -5px 8px;
+        }
+
+        .form-group {
+            flex: 1 0 100%;
+            padding: 0 5px;
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: 500;
+            font-size: 12px;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 13px;
+            height: 36px;
+        }
+
+        button {
+            background-color: var(--secondary);
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            margin-right: 5px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button i {
+            margin-right: 4px;
+            font-size: 12px;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .btn-success {
+            background-color: var(--success);
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+        }
+
+        .btn-warning {
+            background-color: var(--warning);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-top: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            min-width: 600px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .actions {
+            display: flex;
+            gap: 4px;
+        }
+
+        .action-btn {
+            padding: 4px 6px;
+            font-size: 11px;
+        }
+
+        .message {
+            padding: 8px 12px;
+            margin: 8px 0;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background: white;
+        }
+
+        .card-header {
+            padding: 10px 12px;
+            background: #f7f7f7;
+            border-bottom: 1px solid #ddd;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .card-body {
+            padding: 12px;
+            display: none;
+        }
+
+        .card-body.show {
+            display: block;
+        }
+
+        .search-box {
+            margin-bottom: 12px;
+            display: flex;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 8px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            font-size: 13px;
+        }
+
+        .search-box button {
+            border-radius: 0 4px 4px 0;
+            margin: 0;
+        }
+
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .stat-card {
+            flex: 1;
+            min-width: 100px;
+            background: white;
+            padding: 12px;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: var(--gray);
+        }
+
+        .mobile-tabs {
+            display: none;
+        }
+
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 768px) {
+            .container {
+                padding: 8px;
+            }
+            
+            header {
+                padding: 10px 12px;
+            }
+            
+            h1 {
+                font-size: 16px;
+            }
+            
+            .content, .sidebar {
+                padding: 12px;
+            }
+            
+            .form-compact {
+                padding: 10px;
+            }
+            
+            .nav-container {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: 5px;
+            }
+            
+            .nav-item {
+                flex: 0 0 auto;
+            }
+            
+            .desktop-tabs {
+                display: none;
+            }
+            
+            .mobile-tabs {
+                display: block;
+            }
+            
+            .form-group {
+                flex: 1 0 100%;
+            }
+            
+            th, td {
+                padding: 6px;
+                font-size: 11px;
+            }
+            
+            button {
+                margin-bottom: 5px;
+                width: 100%;
+            }
+            
+            .form-row {
+                margin: 0;
+            }
+            
+            .form-group {
+                padding: 0;
+            }
+            
+            .stat-card {
+                min-width: calc(50% - 10px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stat-card {
+                min-width: 100%;
+            }
+            
+            .nav-item {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+            
+            .nav-item i {
+                margin-right: 3px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="app-container">
+            <header>
+                <h1><i class="fas fa-beer"></i> Оборудование пивопроизводства</h1>
+                <div class="user" style="font-size: 12px;">Администратор</div>
+            </header>
+            
+            <div class="main-content">
+                <div class="sidebar">
+                    <div class="nav-container">
+                        <div class="nav-item active" data-target="dashboard">
+                            <i class="fas fa-tachometer-alt"></i> Дашборд
+                        </div>
+                        <div class="nav-item" data-target="departments">
+                            <i class="fas fa-building"></i> Цеха
+                        </div>
+                        <div class="nav-item" data-target="categories">
+                            <i class="fas fa-tags"></i> Категории
+                        </div>
+                        <div class="nav-item" data-target="equipment">
+                            <i class="fas fa-cog"></i> Оборудование
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="content">
+                    <div id="message" class="message" style="display: none;"></div>
+                    
+                    <!-- Дашборд -->
+                    <div id="dashboard" class="section active">
+                        <h2 class="section-title">Панель управления</h2>
+                        
+                        <div class="stats">
+                            <div class="stat-card">
+                                <div class="stat-value" id="dept-count">0</div>
+                                <div class="stat-label">Цехов/отделов</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="cat-count">0</div>
+                                <div class="stat-label">Категорий</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="equip-count">0</div>
+                                <div class="stat-label">Оборудования</div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header" onclick="toggleCard('quickActions')">
+                                Быстрые действия <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div id="quickActions" class="card-body">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <button class="btn-success" onclick="showSection('departments')"><i class="fas fa-plus"></i> Добавить цех</button>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn-success" onclick="showSection('categories')"><i class="fas fa-plus"></i> Добавить категорию</button>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn-success" onclick="showSection('equipment')"><i class="fas fa-plus"></i> Добавить оборудование</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header" onclick="toggleCard('recentEquipment')">
+                                Последнее оборудование <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div id="recentEquipment" class="card-body">
+                                <div class="table-container">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Наименование</th>
+                                                <th>Модель</th>
+                                                <th>Категория</th>
+                                                <th>Цех</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="recent-equipment-body"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Цеха/отделы -->
+                    <div id="departments" class="section">
+                        <h2 class="section-title">Управление цехами/отделами</h2>
+                        
+                        <div class="form-compact">
+                            <h3 style="font-size: 14px; margin-bottom: 10px;">Добавить новый цех/отдел</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="departmentName">Название:</label>
+                                    <input type="text" id="departmentName" placeholder="Введите название">
+                                </div>
+                                <div class="form-group">
+                                    <label for="departmentCode">Код:</label>
+                                    <input type="text" id="departmentCode" placeholder="Введите код">
+                                </div>
+                                <div class="form-group" style="display: flex; align-items: flex-end;">
+                                    <button onclick="addDepartment()"><i class="fas fa-plus"></i> Добавить</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="search-box">
+                            <input type="text" id="searchDepartment" placeholder="Поиск цехов/отделов...">
+                            <button><i class="fas fa-search"></i></button>
+                        </div>
+                        
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Название</th>
+                                        <th>Код</th>
+                                        <th>Действия</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="departmentsTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- Категории оборудования -->
+                    <div id="categories" class="section">
+                        <h2 class="section-title">Управление категориями оборудования</h2>
+                        
+                        <div class="form-compact">
+                            <h3 style="font-size: 14px; margin-bottom: 10px;">Добавить новую категорию</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="categoryName">Название:</label>
+                                    <input type="text" id="categoryName" placeholder="Введите название">
+                                </div>
+                                <div class="form-group">
+                                    <label for="categoryDescription">Описание:</label>
+                                    <input type="text" id="categoryDescription" placeholder="Введите описание">
+                                </div>
+                                <div class="form-group" style="display: flex; align-items: flex-end;">
+                                    <button onclick="addCategory()"><i class="fas fa-plus"></i> Добавить</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="search-box">
+                            <input type="text" id="searchCategory" placeholder="Поиск категорий...">
+                            <button><i class="fas fa-search"></i></button>
+                        </div>
+                        
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Название</th>
+                                        <th>Описание</th>
+                                        <th>Действия</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="categoriesTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- Оборудование -->
+                    <div id="equipment" class="section">
+                        <h2 class="section-title">Управление оборудованием</h2>
+                        
+                        <div class="form-compact">
+                            <h3 style="font-size: 14px; margin-bottom: 10px;">Добавить новое оборудование</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="equipName">Наименование:</label>
+                                    <input type="text" id="equipName" placeholder="Введите наименование">
+                                </div>
+                                <div class="form-group">
+                                    <label for="equipModel">Модель:</label>
+                                    <input type="text" id="equipModel" placeholder="Введите модель">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="equipDepartment">Цех/отдел:</label>
+                                    <select id="equipDepartment"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="equipCategory">Категория:</label>
+                                    <select id="equipCategory"></select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="equipSerial">Серийный номер:</label>
+                                    <input type="text" id="equipSerial" placeholder="Введите серийный номер">
+                                </div>
+                                <div class="form-group">
+                                    <label for="equipStatus">Статус:</label>
+                                    <select id="equipStatus">
+                                        <option value="active">Активно</option>
+                                        <option value="maintenance">На обслуживании</option>
+                                        <option value="inactive">Неактивно</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <button onclick="addEquipment()"><i class="fas fa-plus"></i> Добавить оборудование</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="search-box">
+                            <input type="text" id="searchEquipment" placeholder="Поиск оборудования...">
+                            <button><i class="fas fa-search"></i></button>
+                        </div>
+                        
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Наименование</th>
+                                        <th>Модель</th>
+                                        <th>Категория</th>
+                                        <th>Цех/отдел</th>
+                                        <th>Статус</th>
+                                        <th>Действия</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="equipmentTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Инициализация базы данных
+        let db = {
+            departments: JSON.parse(localStorage.getItem('departments')) || [],
+            categories: JSON.parse(localStorage.getItem('categories')) || [],
+            equipment: JSON.parse(localStorage.getItem('equipment')) || []
+        };
+
+        // Функции для работы с сообщениями
+        function showMessage(text, type = 'success') {
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = text;
+            messageDiv.className = `message ${type}`;
+            messageDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 3000);
+        }
+
+        // Навигация
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            document.getElementById(sectionId).classList.add('active');
+            document.querySelector(`.nav-item[data-target="${sectionId}"]`).classList.add('active');
+            
+            // Прокручиваем к началу секции
+            document.getElementById(sectionId).scrollIntoView({behavior: 'smooth'});
+        }
+
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                showSection(this.getAttribute('data-target'));
+            });
+        });
+
+        function toggleCard(cardId) {
+            const card = document.getElementById(cardId);
+            card.classList.toggle('show');
+        }
+
+        // Функции для работы с цехами/отделами
+        function addDepartment() {
+            const name = document.getElementById('departmentName').value.trim();
+            const code = document.getElementById('departmentCode').value.trim();
+            
+            if (!name) {
+                showMessage('Введите название цеха/отдела', 'error');
+                return;
+            }
+
+            const newDepartment = {
+                id: Date.now(),
+                name: name,
+                code: code || `DEPT${Date.now().toString().slice(-4)}`
+            };
+
+            db.departments.push(newDepartment);
+            localStorage.setItem('departments', JSON.stringify(db.departments));
+            
+            document.getElementById('departmentName').value = '';
+            document.getElementById('departmentCode').value = '';
+            showMessage('Цех/отдел успешно добавлен');
+            updateSelects();
+            displayData();
+            updateStats();
+        }
+
+        function deleteDepartment(id) {
+            // Проверяем, есть ли оборудование в этом цехе
+            const equipmentInDepartment = db.equipment.filter(item => item.departmentId === id);
+            
+            if (equipmentInDepartment.length > 0) {
+                showMessage('Нельзя удалить цех/отдел, в котором есть оборудование', 'error');
+                return;
+            }
+
+            db.departments = db.departments.filter(dept => dept.id !== id);
+            localStorage.setItem('departments', JSON.stringify(db.departments));
+            showMessage('Цех/отдел удален');
+            updateSelects();
+            displayData();
+            updateStats();
+        }
+
+        // Функции для работы с категориями
+        function addCategory() {
+            const name = document.getElementById('categoryName').value.trim();
+            const description = document.getElementById('categoryDescription').value.trim();
+            
+            if (!name) {
+                showMessage('Введите название категории', 'error');
+                return;
+            }
+
+            const newCategory = {
+                id: Date.now(),
+                name: name,
+                description: description
+            };
+
+            db.categories.push(newCategory);
+            localStorage.setItem('categories', JSON.stringify(db.categories));
+            
+            document.getElementById('categoryName').value = '';
+            document.getElementById('categoryDescription').value = '';
+            showMessage('Категория успешно добавлена');
+            updateSelects();
+            displayData();
+            updateStats();
+        }
+
+        function deleteCategory(id) {
+            // Проверяем, есть ли оборудование в этой категории
+            const equipmentInCategory = db.equipment.filter(item => item.categoryId === id);
+            
+            if (equipmentInCategory.length > 0) {
+                showMessage('Нельзя удалить категорию, в которой есть оборудование', 'error');
+                return;
+            }
+
+            db.categories = db.categories.filter(cat => cat.id !== id);
+            localStorage.setItem('categories', JSON.stringify(db.categories));
+            showMessage('Категория удалена');
+            updateSelects();
+            displayData();
+            updateStats();
+        }
+
+        // Функции для работы с оборудованием
+        function addEquipment() {
+            const departmentId = parseInt(document.getElementById('equipDepartment').value);
+            const categoryId = parseInt(document.getElementById('equipCategory').value);
+            const name = document.getElementById('equipName').value.trim();
+            const model = document.getElementById('equipModel').value.trim();
+            const serial = document.getElementById('equipSerial').value.trim();
+            const status = document.getElementById('equipStatus').value;
+
+            if (!departmentId || !categoryId || !name) {
+                showMessage('Заполните все обязательные поля', 'error');
+                return;
+            }
+
+            const newEquipment = {
+                id: Date.now(),
+                name: name,
+                model: model,
+                serial: serial,
+                categoryId: categoryId,
+                departmentId: departmentId,
+                status: status,
+                dateAdded: new Date().toISOString()
+            };
+
+            db.equipment.push(newEquipment);
+            localStorage.setItem('equipment', JSON.stringify(db.equipment));
+            
+            // Очищаем поля формы
+            document.getElementById('equipName').value = '';
+            document.getElementById('equipModel').value = '';
+            document.getElementById('equipSerial').value = '';
+            
+            showMessage('Оборудование успешно добавлено');
+            displayData();
+            updateStats();
+        }
+
+        function deleteEquipment(id) {
+            db.equipment = db.equipment.filter(item => item.id !== id);
+            localStorage.setItem('equipment', JSON.stringify(db.equipment));
+            showMessage('Оборудование удалено');
+            displayData();
+            updateStats();
+        }
+
+        // Обновление выпадающих списков
+        function updateSelects() {
+            const departmentSelect = document.getElementById('equipDepartment');
+            const categorySelect = document.getElementById('equipCategory');
+
+            // Обновляем список цехов
+            departmentSelect.innerHTML = '<option value="">Выберите цех/отдел</option>';
+            db.departments.forEach(dept => {
+                departmentSelect.innerHTML += `<option value="${dept.id}">${dept.name}</option>`;
+            });
+
+            // Обновляем список категорий
+            categorySelect.innerHTML = '<option value="">Выберите категорию</option>';
+            db.categories.forEach(cat => {
+                categorySelect.innerHTML += `<option value="${cat.id}">${cat.name}</option>`;
+            });
+        }
+
+        // Отображение данных в таблицах
+        function displayData() {
+            // Отображаем цеха/отделы
+            const departmentsBody = document.getElementById('departmentsTableBody');
+            departmentsBody.innerHTML = '';
+            db.departments.forEach(dept => {
+                departmentsBody.innerHTML += `
+                    <tr>
+                        <td>${dept.id}</td>
+                        <td>${dept.name}</td>
+                        <td>${dept.code}</td>
+                        <td class="actions">
+                            <button class="action-btn btn-danger" onclick="deleteDepartment(${dept.id})"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            // Отображаем категории
+            const categoriesBody = document.getElementById('categoriesTableBody');
+            categoriesBody.innerHTML = '';
+            db.categories.forEach(cat => {
+                categoriesBody.innerHTML += `
+                    <tr>
+                        <td>${cat.id}</td>
+                        <td>${cat.name}</td>
+                        <td>${cat.description || '-'}</td>
+                        <td class="actions">
+                            <button class="action-btn btn-danger" onclick="deleteCategory(${cat.id})"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            // Отображаем оборудование
+            const equipmentBody = document.getElementById('equipmentTableBody');
+            equipmentBody.innerHTML = '';
+            db.equipment.forEach(item => {
+                const category = db.categories.find(cat => cat.id === item.categoryId);
+                const department = db.departments.find(dept => dept.id === item.departmentId);
+                
+                let statusClass = '';
+                if (item.status === 'active') statusClass = 'success';
+                if (item.status === 'maintenance') statusClass = 'warning';
+                if (item.status === 'inactive') statusClass = 'danger';
+                
+                equipmentBody.innerHTML += `
+                    <tr>
+                        <td>${item.id}</td>
+                        <td>${item.name}</td>
+                        <td>${item.model || '-'}</td>
+                        <td>${category ? category.name : 'Неизвестно'}</td>
+                        <td>${department ? department.name : 'Неизвестно'}</td>
+                        <td><span class="badge ${statusClass}">${getStatusText(item.status)}</span></td>
+                        <td class="actions">
+                            <button class="action-btn btn-danger" onclick="deleteEquipment(${item.id})"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            // Отображаем последнее добавленное оборудование
+            const recentEquipmentBody = document.getElementById('recent-equipment-body');
+            recentEquipmentBody.innerHTML = '';
+            
+            // Берем 5 последних записей
+            const recentEquipment = [...db.equipment].sort((a, b) => b.id - a.id).slice(0, 5);
+            
+            recentEquipment.forEach(item => {
+                const category = db.categories.find(cat => cat.id === item.categoryId);
+                const department = db.departments.find(dept => dept.id === item.departmentId);
+                
+                recentEquipmentBody.innerHTML += `
+                    <tr>
+                        <td>${item.name}</td>
+                        <td>${item.model || '-'}</td>
+                        <td>${category ? category.name : 'Неизвестно'}</td>
+                        <td>${department ? department.name : 'Неизвестно'}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        function getStatusText(status) {
+            const statusMap = {
+                'active': 'Активно',
+                'maintenance': 'Обслуживание',
+                'inactive': 'Неактивно'
+            };
+            return statusMap[status] || status;
+        }
+
+        function updateStats() {
+            document.getElementById('dept-count').textContent = db.departments.length;
+            document.getElementById('cat-count').textContent = db.categories.length;
+            document.getElementById('equip-count').textContent = db.equipment.length;
+        }
+
+        // Инициализация при загрузке страницы
+        window.onload = function() {
+            // Добавляем тестовые данные, если база пуста
+            if (db.departments.length === 0) {
+                db.departments = [
+                    { id: 1, name: 'Варочный цех', code: 'VAR' },
+                    { id: 2, name: 'Цех брожения', code: 'BRZ' },
+                    { id: 3, name: 'Цех фильтрации', code: 'FIL' },
+                    { id: 4, name: 'Разливной цех', code: 'RAZ' }
+                ];
+                localStorage.setItem('departments', JSON.stringify(db.departments));
+            }
+
+            if (db.categories.length === 0) {
+                db.categories = [
+                    { id: 1, name: 'Варочное оборудование', description: 'Оборудование для варки пива' },
+                    { id: 2, name: 'Ферментационное оборудование', description: 'Танки для брожения' },
+                    { id: 3, name: 'Фильтрационное оборудование', description: 'Системы фильтрации' },
+                    { id: 4, name: 'Разливное оборудование', description: 'Линии розлива' },
+                    { id: 5, name: 'КИПиА', description: 'Контрольно-измерительные приборы' }
+                ];
+                localStorage.setItem('categories', JSON.stringify(db.categories));
+            }
+
+            if (db.equipment.length === 0) {
+                db.equipment = [
+                    {
+                        id: 1,
+                        name: 'Варочный котел',
+                        model: 'BK-500',
+                        serial: 'VK2023001',
+                        categoryId: 1,
+                        departmentId: 1,
+                        status: 'active',
+                        dateAdded: new Date().toISOString()
+                    },
+                    {
+                        id: 2,
+                        name: 'Ферментационный танк',
+                        model: 'FT-1000',
+                        serial: 'FT2023001',
+                        categoryId: 2,
+                        departmentId: 2,
+                        status: 'active',
+                        dateAdded: new Date().toISOString()
+                    },
+                    {
+                        id: 3,
+                        name: 'Линия розлива',
+                        model: 'LR-200',
+                        serial: 'LR2023001',
+                        categoryId: 4,
+                        departmentId: 4,
+                        status: 'maintenance',
+                        dateAdded: new Date().toISOString()
+                    }
+                ];
+                localStorage.setItem('equipment', JSON.stringify(db.equipment));
+            }
+
+            updateSelects();
+            displayData();
+            updateStats();
+            
+            // Открываем карточки на дашборде
+            toggleCard('quickActions');
+            toggleCard('recentEquipment');
+            
+            // Добавляем обработчики для поиска
+            document.getElementById('searchDepartment').addEventListener('input', filterDepartments);
+            document.getElementById('searchCategory').addEventListener('input', filterCategories);
+            document.getElementById('searchEquipment').addEventListener('input', filterEquipment);
+        };
+        
+        // Функции для фильтрации
+        function filterDepartments() {
+            const searchTerm = document.getElementById('searchDepartment').value.toLowerCase();
+            const rows = document.getElementById('departmentsTableBody').getElementsByTagName('tr');
+            
+            for (let i = 0; i < rows.length; i++) {
+                const name = rows[i].getElementsByTagName('td')[1].textContent.toLowerCase();
+                const code = rows[i].getElementsByTagName('td')[2].textContent.toLowerCase();
+                
+                if (name.includes(searchTerm) || code.includes(searchTerm)) {
+                    rows[i].style.display = '';
+                } else {
+                    rows[i].style.display = 'none';
+                }
+            }
+        }
+        
+        function filterCategories() {
+            const searchTerm = document.getElementById('searchCategory').value.toLowerCase();
+            const rows = document.getElementById('categoriesTableBody').getElementsByTagName('tr');
+            
+            for (let i = 0; i < rows.length; i++) {
+                const name = rows[i].getElementsByTagName('td')[1].textContent.toLowerCase();
+                const description = rows[i].getElementsByTagName('td')[2].textContent.toLowerCase();
+                
+                if (name.includes(searchTerm) || description.includes(searchTerm)) {
+                    rows[i].style.display = '';
+                } else {
+                    rows[i].style.display = 'none';
+                }
+            }
+        }
+        
+        function filterEquipment() {
+            const searchTerm = document.getElementById('searchEquipment').value.toLowerCase();
+            const rows = document.getElementById('equipmentTableBody').getElementsByTagName('tr');
+            
+            for (let i = 0; i < rows.length; i++) {
+                const name = rows[i].getElementsByTagName('td')[1].textContent.toLowerCase();
+                const model = rows[i].getElementsByTagName('td')[2].textContent.toLowerCase();
+                const category = rows[i].getElementsByTagName('td')[3].textContent.toLowerCase();
+                const department = rows[i].getElementsByTagName('td')[4].textContent.toLowerCase();
+                
+                if (name.includes(searchTerm) || model.includes(searchTerm) || 
+                    category.includes(searchTerm) || department.includes(searchTerm)) {
+                    rows[i].style.display = '';
+                } else {
+                    rows[i].style.display = 'none';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
